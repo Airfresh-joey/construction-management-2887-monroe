@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1C2B3A;
+  --color-navy-light: #2A3F54;
+  --color-green-badge: #059669;
+  --color-amber-badge: #D97706;
+  --color-red-badge: #DC2626;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F3F4F6;
+}
+
+#root {
+  min-height: 100vh;
+}
