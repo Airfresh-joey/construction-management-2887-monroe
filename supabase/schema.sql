@@ -77,16 +77,41 @@ CREATE TABLE photos (
   date DATE NOT NULL DEFAULT CURRENT_DATE,
   description TEXT DEFAULT '',
   file_url TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT now()
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable Row Level Security (open for now — no auth required)
+-- Notes / Field Journal
+CREATE TABLE notes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  date DATE NOT NULL DEFAULT CURRENT_DATE,
+  title TEXT NOT NULL,
+  content TEXT DEFAULT '',
+  category TEXT NOT NULL DEFAULT 'general' CHECK (category IN ('general', 'inspection', 'issue', 'weather', 'delivery')),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Indexes
+CREATE INDEX idx_budget_items_category ON budget_items(category);
+CREATE INDEX idx_schedule_phases_number ON schedule_phases(phase_number);
+CREATE INDEX idx_vendors_trade ON vendors(trade);
+CREATE INDEX idx_vendors_status ON vendors(status);
+CREATE INDEX idx_payments_date ON payments(date);
+CREATE INDEX idx_payments_status ON payments(status);
+CREATE INDEX idx_documents_section ON documents(section);
+CREATE INDEX idx_photos_phase ON photos(phase);
+CREATE INDEX idx_notes_date ON notes(date);
+CREATE INDEX idx_notes_category ON notes(category);
+
+-- Enable Row Level Security
 ALTER TABLE budget_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE schedule_phases ENABLE ROW LEVEL SECURITY;
 ALTER TABLE vendors ENABLE ROW LEVEL SECURITY;
 ALTER TABLE payments ENABLE ROW LEVEL SECURITY;
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE photos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE notes ENABLE ROW LEVEL SECURITY;
 
 -- Allow all access (owner-builder single user)
 CREATE POLICY "Allow all" ON budget_items FOR ALL USING (true) WITH CHECK (true);
@@ -95,8 +120,28 @@ CREATE POLICY "Allow all" ON vendors FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all" ON payments FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all" ON documents FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow all" ON photos FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all" ON notes FOR ALL USING (true) WITH CHECK (true);
 
 -- Create storage bucket for documents and photos
-INSERT INTO storage.buckets (id, name, public) VALUES ('project-files', 'project-files', true);
+INSERT INTO storage.buckets (id, name, public) VALUES ('project-files', 'project-files', true)
+ON CONFLICT (id) DO NOTHING;
 CREATE POLICY "Allow public uploads" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'project-files');
 CREATE POLICY "Allow public reads" ON storage.objects FOR SELECT USING (bucket_id = 'project-files');
+CREATE POLICY "Allow public deletes" ON storage.objects FOR DELETE USING (bucket_id = 'project-files');
+
+-- Updated_at trigger
+CREATE OR REPLACE FUNCTION update_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON budget_items FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON schedule_phases FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON vendors FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON payments FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON documents FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON photos FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER set_updated_at BEFORE UPDATE ON notes FOR EACH ROW EXECUTE FUNCTION update_updated_at();

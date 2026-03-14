@@ -59,3 +59,12 @@ export interface Photo {
   description: string;
   file_url: string;
 }
+
+export interface Note {
+  id: string;
+  date: string;
+  title: string;
+  content: string;
+  category: 'general' | 'inspection' | 'issue' | 'weather' | 'delivery';
+  created_at: string;
+}
