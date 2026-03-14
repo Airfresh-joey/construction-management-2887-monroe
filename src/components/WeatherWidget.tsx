@@ -93,11 +93,11 @@ export default function WeatherWidget() {
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-bold text-navy dark:text-white">Weather Forecast</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Denver, CO — 7-day outlook for scheduling decisions</p>
+          <p className="text-gray-500 dark:text-slate-400 mt-1">Denver, CO — 7-day outlook for scheduling decisions</p>
         </div>
         <button
           onClick={refreshForecast}
-          className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+          className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg"
         >
           <RefreshCw className="w-4 h-4" /> Refresh
         </button>
@@ -157,15 +157,15 @@ export default function WeatherWidget() {
         {upcoming.map(day => {
           const impact = getWorkImpact(day);
           return (
-            <div key={day.date} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+            <div key={day.date} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-4 text-center">
               <p className="text-sm font-medium text-gray-900 dark:text-white">{day.dayName}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{day.date}</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400">{day.date}</p>
               <div className="my-3 flex justify-center">
                 <WeatherIcon condition={day.condition} className="w-8 h-8" />
               </div>
               <p className="text-lg font-bold text-gray-900 dark:text-white">{day.high}°</p>
               <p className="text-sm text-gray-400">{day.low}°</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{day.condition}</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400 mt-1">{day.condition}</p>
               <div className={`mt-2 w-2 h-2 rounded-full mx-auto ${
                 impact.level === 'delay' ? 'bg-red-500' :
                 impact.level === 'caution' ? 'bg-amber-500' :
@@ -177,7 +177,7 @@ export default function WeatherWidget() {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+      <div className="flex items-center gap-6 text-xs text-gray-500 dark:text-slate-400">
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /> Good for work</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" /> Use caution</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500" /> Delays likely</span>

@@ -45,19 +45,19 @@ export default function CostEstimator() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-navy dark:text-white">AI Cost Estimator</h2>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Denver market construction cost ranges per square foot</p>
+        <p className="text-gray-500 dark:text-slate-400 mt-1">Denver market construction cost ranges per square foot</p>
       </div>
 
       {/* Input */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Square Footage</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">Project Square Footage</label>
             <input
               type="number"
               value={sqft}
               onChange={e => setSqft(Math.max(0, parseInt(e.target.value) || 0))}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-lg font-semibold"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-lg font-semibold"
               placeholder="Enter sqft"
             />
           </div>
@@ -79,7 +79,7 @@ export default function CostEstimator() {
             className={`px-3 py-1.5 text-xs rounded-full font-medium transition-colors ${
               selectedTrades.includes(c.trade)
                 ? 'bg-navy text-white'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
             }`}
           >
             {c.trade}
@@ -88,31 +88,31 @@ export default function CostEstimator() {
       </div>
 
       {/* Cost breakdown */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-              <th className="text-left py-3 px-4 font-semibold text-gray-700 dark:text-gray-300">Trade</th>
-              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-gray-300">Low $/sqft</th>
-              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-gray-300">High $/sqft</th>
-              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-gray-300">Low Est.</th>
-              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-gray-300">High Est.</th>
-              <th className="text-left py-3 px-4 font-semibold text-gray-700 dark:text-gray-300 hidden md:table-cell">Notes</th>
+            <tr className="bg-gray-50 dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+              <th className="text-left py-3 px-4 font-semibold text-gray-700 dark:text-slate-300">Trade</th>
+              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-slate-300">Low $/sqft</th>
+              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-slate-300">High $/sqft</th>
+              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-slate-300">Low Est.</th>
+              <th className="text-right py-3 px-4 font-semibold text-gray-700 dark:text-slate-300">High Est.</th>
+              <th className="text-left py-3 px-4 font-semibold text-gray-700 dark:text-slate-300 hidden md:table-cell">Notes</th>
             </tr>
           </thead>
           <tbody>
             {DENVER_COST_DATA.map(cost => (
-              <tr key={cost.trade} className={`border-b border-gray-100 dark:border-gray-700 ${
-                selectedTrades.includes(cost.trade) ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-900 opacity-50'
+              <tr key={cost.trade} className={`border-b border-gray-100 dark:border-slate-700 ${
+                selectedTrades.includes(cost.trade) ? 'bg-white dark:bg-slate-800' : 'bg-gray-50 dark:bg-slate-900 opacity-50'
               }`}>
                 <td className="py-3 px-4 font-medium text-gray-900 dark:text-white flex items-center gap-2">
                   <Calculator className="w-4 h-4 text-gray-400" />
                   {cost.trade}
                 </td>
-                <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-400">
+                <td className="py-3 px-4 text-right text-gray-600 dark:text-slate-400">
                   {cost.unit === 'sqft' ? `$${cost.lowPerSqft}` : '—'}
                 </td>
-                <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-400">
+                <td className="py-3 px-4 text-right text-gray-600 dark:text-slate-400">
                   {cost.unit === 'sqft' ? `$${cost.highPerSqft}` : '—'}
                 </td>
                 <td className="py-3 px-4 text-right font-medium text-gray-900 dark:text-white">
@@ -121,7 +121,7 @@ export default function CostEstimator() {
                 <td className="py-3 px-4 text-right font-medium text-gray-900 dark:text-white">
                   {cost.unit === 'sqft' ? formatCurrency(cost.highPerSqft * sqft) : '—'}
                 </td>
-                <td className="py-3 px-4 text-gray-500 dark:text-gray-400 text-xs hidden md:table-cell">{cost.notes}</td>
+                <td className="py-3 px-4 text-gray-500 dark:text-slate-400 text-xs hidden md:table-cell">{cost.notes}</td>
               </tr>
             ))}
           </tbody>
@@ -140,7 +140,7 @@ export default function CostEstimator() {
         </table>
       </div>
 
-      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 rounded-lg p-3">
         <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
         <p>Estimates based on 2025–2026 Denver metro construction costs. Actual costs vary by project complexity, site conditions, material choices, and contractor. Always get 3+ quotes.</p>
       </div>

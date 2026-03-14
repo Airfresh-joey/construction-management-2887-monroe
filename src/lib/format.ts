@@ -21,15 +21,15 @@ export function statusColor(status: string): string {
     case 'complete':
     case 'paid':
     case 'contracted':
-      return 'bg-emerald-100 text-emerald-800';
+      return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400';
     case 'active':
     case 'pending':
     case 'prospect':
-      return 'bg-amber-100 text-amber-800';
+      return 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400';
     case 'needed':
     case 'overdue':
-      return 'bg-red-100 text-red-800';
+      return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
     default:
-      return 'bg-gray-100 text-gray-800';
+      return 'bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-300';
   }
 }

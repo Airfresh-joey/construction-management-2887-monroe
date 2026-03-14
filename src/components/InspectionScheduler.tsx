@@ -48,13 +48,13 @@ export default function InspectionScheduler() {
       case 'failed': return <AlertTriangle className="w-5 h-5 text-red-500" />;
       case 'scheduled': return <Clock className="w-5 h-5 text-blue-500" />;
       case 'requested': return <Clock className="w-5 h-5 text-amber-500" />;
-      default: return <Circle className="w-5 h-5 text-gray-300 dark:text-gray-600" />;
+      default: return <Circle className="w-5 h-5 text-gray-300 dark:text-slate-600" />;
     }
   };
 
   const statusLabel = (status: ScheduledInspection['status']) => {
     const map: Record<string, { label: string; classes: string }> = {
-      not_scheduled: { label: 'Not Scheduled', classes: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400' },
+      not_scheduled: { label: 'Not Scheduled', classes: 'bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-slate-400' },
       requested: { label: 'Requested', classes: 'bg-amber-100 text-amber-800' },
       scheduled: { label: 'Scheduled', classes: 'bg-blue-100 text-blue-800' },
       passed: { label: 'Passed', classes: 'bg-emerald-100 text-emerald-800' },
@@ -72,7 +72,7 @@ export default function InspectionScheduler() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-navy dark:text-white">Inspection Scheduler</h2>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Track Denver Building Department inspections</p>
+        <p className="text-gray-500 dark:text-slate-400 mt-1">Track Denver Building Department inspections</p>
       </div>
 
       {/* Denver Building Dept Info */}
@@ -97,12 +97,12 @@ export default function InspectionScheduler() {
       </div>
 
       {/* Progress */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-semibold text-gray-900 dark:text-white">Inspection Progress</h3>
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">{passedCount} / {inspections.length} passed</span>
+          <span className="text-sm font-medium text-gray-600 dark:text-slate-400">{passedCount} / {inspections.length} passed</span>
         </div>
-        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+        <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-3">
           <div
             className="bg-emerald-500 h-3 rounded-full transition-all duration-500"
             style={{ width: `${(passedCount / inspections.length) * 100}%` }}
@@ -117,39 +117,39 @@ export default function InspectionScheduler() {
           const relatedPhase = phases.find(p => p.name.toLowerCase().includes(type.typicalPhase.toLowerCase()));
 
           return (
-            <div key={type.code} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <div key={type.code} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
               <div className="flex items-start gap-4">
                 {statusIcon(insp.status)}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 flex-wrap">
                     <h4 className="font-semibold text-gray-900 dark:text-white">{type.name} Inspection</h4>
-                    <span className="text-xs font-mono text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">{type.code}</span>
+                    <span className="text-xs font-mono text-gray-400 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded">{type.code}</span>
                     {statusLabel(insp.status)}
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{type.description}</p>
+                  <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">{type.description}</p>
 
                   {relatedPhase && (
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 dark:text-slate-500 mt-1">
                       Related phase: {relatedPhase.name} — {relatedPhase.status === 'complete' ? 'Complete' : relatedPhase.start_date ? `Starts ${formatDate(relatedPhase.start_date)}` : 'Not started'}
                     </p>
                   )}
 
                   <div className="flex gap-3 mt-3 flex-wrap items-center">
                     <div>
-                      <label className="text-xs text-gray-500 dark:text-gray-400 block mb-0.5">Target Date</label>
+                      <label className="text-xs text-gray-500 dark:text-slate-400 block mb-0.5">Target Date</label>
                       <input
                         type="date"
                         value={insp.requestedDate}
                         onChange={e => updateInspection(index, { requestedDate: e.target.value })}
-                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded text-sm"
+                        className="px-2 py-1 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded text-sm"
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-gray-500 dark:text-gray-400 block mb-0.5">Status</label>
+                      <label className="text-xs text-gray-500 dark:text-slate-400 block mb-0.5">Status</label>
                       <select
                         value={insp.status}
                         onChange={e => updateInspection(index, { status: e.target.value as ScheduledInspection['status'] })}
-                        className="px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded text-sm"
+                        className="px-2 py-1 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded text-sm"
                       >
                         {statusOptions.map(s => (
                           <option key={s} value={s}>{s.replace('_', ' ')}</option>
@@ -157,12 +157,12 @@ export default function InspectionScheduler() {
                       </select>
                     </div>
                     <div className="flex-1 min-w-[200px]">
-                      <label className="text-xs text-gray-500 dark:text-gray-400 block mb-0.5">Notes</label>
+                      <label className="text-xs text-gray-500 dark:text-slate-400 block mb-0.5">Notes</label>
                       <input
                         value={insp.notes}
                         onChange={e => updateInspection(index, { notes: e.target.value })}
                         placeholder="Inspector comments, corrections needed..."
-                        className="w-full px-2 py-1 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded text-sm"
+                        className="w-full px-2 py-1 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded text-sm"
                       />
                     </div>
                   </div>
@@ -173,7 +173,7 @@ export default function InspectionScheduler() {
         })}
       </div>
 
-      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 rounded-lg p-3">
         <ClipboardCheck className="w-4 h-4 flex-shrink-0 mt-0.5" />
         <p>Schedule inspections at least 5–7 business days in advance. Failed inspections require corrections and re-inspection. Keep your permit posted on-site at all times.</p>
       </div>

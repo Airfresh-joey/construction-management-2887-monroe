@@ -5,7 +5,7 @@ import type { Note } from '../types';
 import { BookOpen, Plus, Pencil, Trash2, X, Check, Tag } from 'lucide-react';
 
 const CATEGORIES: { value: Note['category']; label: string; color: string }[] = [
-  { value: 'general', label: 'General', color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' },
+  { value: 'general', label: 'General', color: 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-slate-300' },
   { value: 'inspection', label: 'Inspection', color: 'bg-blue-100 text-blue-700' },
   { value: 'issue', label: 'Issue', color: 'bg-red-100 text-red-700' },
   { value: 'weather', label: 'Weather', color: 'bg-amber-100 text-amber-700' },
@@ -75,7 +75,7 @@ export default function NotesJournal() {
       <div className="flex justify-between items-start">
         <div>
           <h2 className="text-2xl font-bold text-navy dark:text-white">Field Notes</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-1">Daily journal for site updates and observations</p>
+          <p className="text-gray-500 dark:text-slate-400 mt-1">Daily journal for site updates and observations</p>
         </div>
         <button
           onClick={() => setShowAdd(!showAdd)}
@@ -87,7 +87,7 @@ export default function NotesJournal() {
 
       {/* Add note form */}
       {showAdd && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
           <h3 className="font-semibold text-gray-900 dark:text-white mb-3">New Field Note</h3>
           <div className="space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -95,13 +95,13 @@ export default function NotesJournal() {
                 type="date"
                 value={newNote.date}
                 onChange={e => setNewNote({ ...newNote, date: e.target.value })}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm"
+                className="px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-sm"
               />
               <input
                 placeholder="Title *"
                 value={newNote.title}
                 onChange={e => setNewNote({ ...newNote, title: e.target.value })}
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm sm:col-span-2"
+                className="px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-sm sm:col-span-2"
               />
             </div>
             <textarea
@@ -109,7 +109,7 @@ export default function NotesJournal() {
               value={newNote.content}
               onChange={e => setNewNote({ ...newNote, content: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-sm"
             />
             <div className="flex items-center gap-3">
               <div className="flex gap-2">
@@ -118,7 +118,7 @@ export default function NotesJournal() {
                     key={cat.value}
                     onClick={() => setNewNote({ ...newNote, category: cat.value })}
                     className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
-                      newNote.category === cat.value ? cat.color + ' ring-2 ring-offset-1 ring-navy' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
+                      newNote.category === cat.value ? cat.color + ' ring-2 ring-offset-1 ring-navy' : 'bg-gray-100 dark:bg-slate-700 text-gray-500 dark:text-slate-400'
                     }`}
                   >
                     {cat.label}
@@ -127,7 +127,7 @@ export default function NotesJournal() {
               </div>
               <div className="flex gap-2 ml-auto">
                 <button onClick={addNote} className="px-4 py-2 bg-emerald-600 text-white text-sm rounded-lg hover:bg-emerald-700">Save</button>
-                <button onClick={() => setShowAdd(false)} className="px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 text-sm rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500">Cancel</button>
+                <button onClick={() => setShowAdd(false)} className="px-4 py-2 bg-gray-200 dark:bg-slate-600 text-gray-700 dark:text-slate-200 text-sm rounded-lg hover:bg-gray-300 dark:hover:bg-slate-500">Cancel</button>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function NotesJournal() {
         <button
           onClick={() => setFilterCategory('all')}
           className={`px-3 py-1.5 text-xs rounded-full font-medium transition-colors ${
-            filterCategory === 'all' ? 'bg-navy text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+            filterCategory === 'all' ? 'bg-navy text-white' : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
           }`}
         >
           All ({notes.length})
@@ -151,7 +151,7 @@ export default function NotesJournal() {
               key={cat.value}
               onClick={() => setFilterCategory(cat.value)}
               className={`px-3 py-1.5 text-xs rounded-full font-medium transition-colors ${
-                filterCategory === cat.value ? 'bg-navy text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                filterCategory === cat.value ? 'bg-navy text-white' : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
               }`}
             >
               {cat.label} ({count})
@@ -162,26 +162,26 @@ export default function NotesJournal() {
 
       {/* Notes list */}
       {sortedNotes.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-12 text-center">
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-12 text-center">
           <BookOpen className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-          <p className="text-gray-500 dark:text-gray-400">No field notes yet. Add your first note to start tracking site updates.</p>
+          <p className="text-gray-500 dark:text-slate-400">No field notes yet. Add your first note to start tracking site updates.</p>
         </div>
       ) : (
         <div className="space-y-3">
           {sortedNotes.map(note => (
-            <div key={note.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
+            <div key={note.id} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-5">
               {editingId === note.id ? (
                 <div className="space-y-3">
                   <input
                     value={editData.title || ''}
                     onChange={e => setEditData({ ...editData, title: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm font-semibold"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-sm font-semibold"
                   />
                   <textarea
                     value={editData.content || ''}
                     onChange={e => setEditData({ ...editData, content: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-sm"
                   />
                   <div className="flex gap-2">
                     {CATEGORIES.map(cat => (
@@ -189,7 +189,7 @@ export default function NotesJournal() {
                         key={cat.value}
                         onClick={() => setEditData({ ...editData, category: cat.value })}
                         className={`px-2 py-1 text-xs rounded-full font-medium ${
-                          editData.category === cat.value ? cat.color + ' ring-2 ring-offset-1 ring-navy' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'
+                          editData.category === cat.value ? cat.color + ' ring-2 ring-offset-1 ring-navy' : 'bg-gray-100 dark:bg-slate-700 text-gray-400'
                         }`}
                       >
                         {cat.label}
@@ -212,7 +212,7 @@ export default function NotesJournal() {
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <button onClick={() => startEdit(note)} className="p-1 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                      <button onClick={() => startEdit(note)} className="p-1 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded">
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button onClick={() => deleteNote(note.id)} className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded">
@@ -220,9 +220,9 @@ export default function NotesJournal() {
                       </button>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{formatDate(note.date)}</p>
+                  <p className="text-xs text-gray-400 dark:text-slate-500 mt-1">{formatDate(note.date)}</p>
                   {note.content && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-2 whitespace-pre-wrap">{note.content}</p>
+                    <p className="text-sm text-gray-600 dark:text-slate-300 mt-2 whitespace-pre-wrap">{note.content}</p>
                   )}
                 </div>
               )}

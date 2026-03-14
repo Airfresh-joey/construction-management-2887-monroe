@@ -164,14 +164,14 @@ export default function MaterialCalculator() {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-navy dark:text-white">Material Calculator</h2>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Rough material estimates based on square footage</p>
+        <p className="text-gray-500 dark:text-slate-400 mt-1">Rough material estimates based on square footage</p>
       </div>
 
       {/* Inputs */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
               <Ruler className="w-4 h-4 inline mr-1" />
               Square Footage
             </label>
@@ -179,11 +179,11 @@ export default function MaterialCalculator() {
               type="number"
               value={sqft}
               onChange={e => setSqft(Math.max(0, parseInt(e.target.value) || 0))}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-lg font-semibold"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-lg font-semibold"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
               <Ruler className="w-4 h-4 inline mr-1" />
               Wall Height (feet)
             </label>
@@ -191,7 +191,7 @@ export default function MaterialCalculator() {
               type="number"
               value={wallHeight}
               onChange={e => setWallHeight(Math.max(1, parseInt(e.target.value) || 8))}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-lg font-semibold"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg text-lg font-semibold"
             />
           </div>
         </div>
@@ -204,10 +204,10 @@ export default function MaterialCalculator() {
           const isExpanded = expandedCategory === cat || expandedCategory === null;
 
           return (
-            <div key={cat} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div key={cat} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
               <button
                 onClick={() => toggleCategory(cat)}
-                className="w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                className="w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50 dark:hover:bg-slate-700/50"
               >
                 <div className="flex items-center gap-2">
                   <Package className="w-5 h-5 text-navy dark:text-blue-400" />
@@ -217,24 +217,24 @@ export default function MaterialCalculator() {
                 <span className={`text-sm text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}>▼</span>
               </button>
               {isExpanded && (
-                <div className="border-t border-gray-200 dark:border-gray-700">
+                <div className="border-t border-gray-200 dark:border-slate-700">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-gray-50 dark:bg-gray-900">
-                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-gray-400">Material</th>
-                        <th className="text-right py-2 px-5 font-medium text-gray-600 dark:text-gray-400">Quantity</th>
-                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-gray-400">Unit</th>
-                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-gray-400 hidden md:table-cell">Notes</th>
+                      <tr className="bg-gray-50 dark:bg-slate-900">
+                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-slate-400">Material</th>
+                        <th className="text-right py-2 px-5 font-medium text-gray-600 dark:text-slate-400">Quantity</th>
+                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-slate-400">Unit</th>
+                        <th className="text-left py-2 px-5 font-medium text-gray-600 dark:text-slate-400 hidden md:table-cell">Notes</th>
                       </tr>
                     </thead>
                     <tbody>
                       {materials.map(mat => (
-                        <tr key={mat.name} className="border-t border-gray-100 dark:border-gray-700">
+                        <tr key={mat.name} className="border-t border-gray-100 dark:border-slate-700">
                           <td className="py-2.5 px-5 text-gray-900 dark:text-white">{mat.name}</td>
                           <td className="py-2.5 px-5 text-right font-bold text-navy dark:text-blue-400 text-lg">
                             {mat.formula(sqft, wallHeight).toLocaleString()}
                           </td>
-                          <td className="py-2.5 px-5 text-gray-500 dark:text-gray-400">{mat.unit}</td>
+                          <td className="py-2.5 px-5 text-gray-500 dark:text-slate-400">{mat.unit}</td>
                           <td className="py-2.5 px-5 text-gray-400 text-xs hidden md:table-cell">{mat.notes}</td>
                         </tr>
                       ))}
@@ -247,7 +247,7 @@ export default function MaterialCalculator() {
         })}
       </div>
 
-      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg p-3">
+      <div className="flex items-start gap-2 text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 rounded-lg p-3">
         <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
         <p>These are rough estimates for planning purposes. Add 10–15% waste factor for materials. Actual quantities depend on design, openings (doors/windows), and layout. Always verify with your contractor.</p>
       </div>

@@ -27,7 +27,7 @@ export default function DocumentChecklist() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64 text-gray-500">Loading documents...</div>;
+    return <div className="flex items-center justify-center h-64 text-gray-500 dark:text-slate-400">Loading documents...</div>;
   }
 
   const totalDocs = docs.length;
@@ -36,31 +36,31 @@ export default function DocumentChecklist() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold text-navy">Document Checklist</h2>
-        <p className="text-gray-500 mt-1">{completeDocs} of {totalDocs} documents complete</p>
+        <h2 className="text-2xl font-bold text-navy dark:text-white">Document Checklist</h2>
+        <p className="text-gray-500 dark:text-slate-400 mt-1">{completeDocs} of {totalDocs} documents complete</p>
       </div>
 
       {/* Progress */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4">
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-4">
         <div className="flex justify-between text-sm mb-2">
-          <span className="text-gray-600">Document completion</span>
-          <span className="font-medium">{totalDocs > 0 ? Math.round((completeDocs / totalDocs) * 100) : 0}%</span>
+          <span className="text-gray-600 dark:text-slate-400">Document completion</span>
+          <span className="font-medium text-gray-900 dark:text-white">{totalDocs > 0 ? Math.round((completeDocs / totalDocs) * 100) : 0}%</span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
           <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${totalDocs > 0 ? (completeDocs / totalDocs) * 100 : 0}%` }} />
         </div>
       </div>
 
       {sections.map(section => (
-        <div key={section} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-            <h3 className="font-semibold text-gray-900">{section}</h3>
+        <div key={section} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+          <div className="bg-gray-50 dark:bg-slate-900 px-4 py-3 border-b border-gray-200 dark:border-slate-700">
+            <h3 className="font-semibold text-gray-900 dark:text-white">{section}</h3>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-gray-100 dark:divide-slate-700">
             {docs.filter(d => d.section === section).map(doc => (
-              <div key={doc.id} className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50">
-                <FileText className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                <span className="flex-1 text-sm text-gray-700">{doc.name}</span>
+              <div key={doc.id} className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-slate-700/50">
+                <FileText className="w-4 h-4 text-gray-400 dark:text-slate-500 flex-shrink-0" />
+                <span className="flex-1 text-sm text-gray-700 dark:text-slate-300">{doc.name}</span>
 
                 <button
                   onClick={() => cycleStatus(doc)}
@@ -70,11 +70,11 @@ export default function DocumentChecklist() {
                 </button>
 
                 {doc.file_url ? (
-                  <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="p-1 text-blue-600 hover:bg-blue-50 rounded">
+                  <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="p-1 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded">
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 ) : (
-                  <label className="p-1 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded cursor-pointer">
+                  <label className="p-1 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 rounded cursor-pointer">
                     <Upload className="w-4 h-4" />
                     <input
                       type="file"

@@ -20,9 +20,55 @@ body {
 }
 
 .dark body {
-  background-color: #111827;
+  background-color: #0f172a;
 }
 
 #root {
   min-height: 100vh;
+}
+
+/* Safe area padding for mobile bottom nav */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Range input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1C2B3A;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.dark input[type="range"]::-webkit-slider-thumb {
+  background: #60a5fa;
+  border-color: #1e293b;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1C2B3A;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+  background: #60a5fa;
+  border-color: #1e293b;
 }
